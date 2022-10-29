@@ -2,7 +2,6 @@
 namespace GDO\TCPDF;
 
 use GDO\Core\GDO_Module;
-use GDO\Core\GDT_Array;
 use GDO\File\GDT_ImageFile;
 use GDO\File\GDO_File;
 use GDO\Util\FileUtil;
@@ -22,30 +21,27 @@ final class Module_TCPDF extends GDO_Module
 {
 	public int $priority = 8;
 	
-	public function onInstall() { FileUtil::createDir($this->tempPath()); }
+	public function onInstall(): void { FileUtil::createDir($this->tempPath()); }
 
-	public function includeTCPDF() { require_once $this->filePath('TCPDF/tcpdf.php'); }
+	public function includeTCPDF(): void { require_once $this->filePath('TCPDF/tcpdf.php'); }
 	
-	public function onLoadLanguage() { return $this->loadLanguage('lang/tcpdf'); }
+	public function onLoadLanguage(): void { $this->loadLanguage('lang/tcpdf'); }
 	
-	public function thirdPartyFolders() { return ['/TCPDF/']; }
+	public function thirdPartyFolders(): array { return ['TCPDF/']; }
 	
 	##############
 	### Config ###
 	##############
-	public function getConfig()
+	public function getConfig(): array
 	{
-		return array(
+		return [
 			GDT_ImageFile::make('pdf_top_logo')->previewHREF(href('TCPDF', 'Logo', "&id={id}")),
 			GDT_UInt::make('pdf_top_logo_height')->notNull()->initial('0'),
-		);
+		];
 	} 
 	
-	/**
-	 * @return GDO_File
-	 */
-	public function cfgLogo() { return $this->getConfigValue('pdf_top_logo'); }
-	public function cfgLogoId() { return $this->getConfigVar('pdf_top_logo'); }
+	public function cfgLogo(): ?GDO_File { return $this->getConfigValue('pdf_top_logo'); }
+	public function cfgLogoId(): ?string { return $this->getConfigVar('pdf_top_logo'); }
 	public function cfgLogoHeight() { return $this->getConfigVar('pdf_top_logo_height'); }
 
 }

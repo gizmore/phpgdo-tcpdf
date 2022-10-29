@@ -7,9 +7,9 @@ use GDO\TCPDF\Module_TCPDF;
 
 final class Logo extends Method
 {
-    public function isTrivial() { return false; }
+    public function isTrivial(): bool { return false; }
     
-	public function showInSitemap() { return false; }
+	public function isShownInSitemap(): bool { return false; }
 	
 	public function execute()
 	{
