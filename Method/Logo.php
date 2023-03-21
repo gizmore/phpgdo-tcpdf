@@ -7,10 +7,11 @@ use GDO\TCPDF\Module_TCPDF;
 
 final class Logo extends Method
 {
-    public function isTrivial(): bool { return false; }
-    
+
+	public function isTrivial(): bool { return false; }
+
 	public function isShownInSitemap(): bool { return false; }
-	
+
 	public function execute()
 	{
 		if ($fileId = Module_TCPDF::instance()->cfgLogoId())
@@ -22,5 +23,5 @@ final class Logo extends Method
 			return $this->error('err_unknown_file');
 		}
 	}
-	
+
 }
