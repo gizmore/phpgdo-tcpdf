@@ -1,6 +1,7 @@
 <?php
 namespace GDO\TCPDF\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\Method;
 use GDO\File\Method\GetFile;
 use GDO\TCPDF\Module_TCPDF;
@@ -12,7 +13,7 @@ final class Logo extends Method
 
 	public function isShownInSitemap(): bool { return false; }
 
-	public function execute()
+	public function execute(): GDT
 	{
 		if ($fileId = Module_TCPDF::instance()->cfgLogoId())
 		{
