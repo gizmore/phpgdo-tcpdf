@@ -40,7 +40,13 @@ final class Module_TCPDF extends GDO_Module
 	### Config ###
 	##############
 
-	public function includeTCPDF(): void { require_once $this->filePath('TCPDF/tcpdf.php'); }
+	public function includeTCPDF(): void
+    {
+        $old = error_reporting();
+        error_reporting(0);
+        require_once $this->filePath('TCPDF/tcpdf.php');
+        error_reporting($old);
+    }
 
 	public function cfgLogo(): ?GDO_File { return $this->getConfigValue('pdf_top_logo'); }
 
